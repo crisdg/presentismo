@@ -1,0 +1,29 @@
+extends  ../layout
+block content
+  
+    
+    a.btn.btn-success(href="/empleados/create") Nueva Empleado +
+    a.btn.btn-dark(href="/") Volver
+    table.table
+        thead
+            tr
+                th(scope='col') #ID
+                th(scope='col') Apellido
+                th(scope='col') Nombre
+                th(scope='col') DNI
+                th(scope='col')
+        tbody
+            each empleado in empleados
+              tr
+                td(scope='row')
+                  = empleado.code
+                td= empleado.apellido
+                td= empleado.nombre
+                td= empleado.dni
+                td
+                  a(href='empleados/' + empleado.code + '/update') Editar 
+                td
+                    form.inline(method='post' action='empleados/' + empleado.code + '/delete')
+                        input(type='hidden' name='id' value= empleado.code)
+                        button.link-button.btn-danger(type='submit' name='submit_param' value='submit_value' class='btn' )
+                            = 'Eliminar'

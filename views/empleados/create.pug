@@ -1,0 +1,33 @@
+extends ../layout
+block content
+    a(href='/empleados') volver
+    .container.col-md-4
+        form(action="/empleados/create" method="post")
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputcode') ID
+                .col-sm-10
+                    input#inputcode.form-control(type='text' name="code")
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputapellido') Apellido
+                .col-sm-10
+                    input#inputapellido.form-control(type='text' name="apellido")
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputnombre') Nombre
+                .col-sm-10
+                    input#inputnombre.form-control(type='text' name='nombre')
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputdni') DNI
+                .col-sm-10
+                    input#inputdni.form-control(type='text' name="dni")
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputdir') Direccion
+                .col-sm-10
+                    input#inputdir.form-control(type='text' name="direccion")
+            .form-group.row
+                label.col-sm-2.col-form-label(for='inputpuesto') Puesto
+                .col-sm-10
+                    input#inputpuesto.form-control(type='text' name="puesto")
+        
+            button.btn.btn-primary(type='submit', value="OK") Agregar
+                
+                

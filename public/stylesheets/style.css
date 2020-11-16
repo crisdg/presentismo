@@ -1,0 +1,51 @@
+body {
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height: 1.4;
+  color: #333;
+  background-color: #fff;
+  padding: 0;
+}
+
+table {
+  position: relative;
+  border-collapse: collapse;
+}
+table tr td {
+  width: 1%;
+  white-space: nowrap;
+}
+
+td,
+th {
+  padding: 0.25em;
+}
+
+thead th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: 53px;
+  background: #000;
+  color: #fff;
+}
+
+thead th:first-child {
+  left: 0;
+  z-index: 1;
+}
+
+tbody th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 0;
+  background: #000;
+  border-right: 1px solid #ccc;
+  color: #ffffff;
+}
+
+table tbody tr th {
+  width: 1%;
+  white-space: nowrap;
+  background-color: lightgray;
+  color: gray;
+}
