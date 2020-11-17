@@ -26,9 +26,32 @@ exports.empleadosCreatePost = function (req, res) {
   });
 };
 
-/*exports.bicicletaUpdateGet = function (req, res) {
-  bicicleta.findByCode(req.params.id, function (err, bici) {
-    console.log(bici);
-    res.render("bicicletas/update", { bici });
+exports.empleadosUpdateGet = function (req, res) {
+  Empleado.findByCode(req.params.id, function (err, empleado) {
+    console.log(req.params, "desde update get");
+    res.render("empleados/update", { empleado });
   });
-}; */
+};
+
+exports.empleadosUpdatePost = function (req, res) {
+  console.log(req.body, "desde post");
+  Empleado.findByCode(req.params.id, function (err, empleado) {
+    empleado.code = req.body.id;
+    empleado.apellido = req.body.apellido;
+    empleado.nombre = req.body.nombre;
+    empleado.dni = req.body.dni;
+    empleado.direccion = req.body.direccion;
+    empleado.puesto = req.body.puesto;
+    console.log(empleado, "desde update post");
+    empleado.save();
+
+    res.redirect("/empleados");
+  });
+};
+
+exports.empleadosDeletePost = function (req, res) {
+  Empleado.removeByCode(req.body.id, function (err) {
+    console.log(req.body.id, "desde delete");
+    res.redirect("/empleados");
+  });
+};
