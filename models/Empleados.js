@@ -8,6 +8,7 @@ var empleadoSchema = new Schema({
   dni: Number,
   direccion: String,
   puesto: String,
+  turno: String,
 });
 
 empleadoSchema.methods.toString = function () {
@@ -20,7 +21,8 @@ empleadoSchema.statics.createInstance = function (
   apellido,
   dni,
   direccion,
-  puesto
+  puesto,
+  turno
 ) {
   return new this({
     code: code,
@@ -29,6 +31,7 @@ empleadoSchema.statics.createInstance = function (
     dni: dni,
     direccion: direccion,
     puesto: puesto,
+    turno: turno,
   });
 };
 

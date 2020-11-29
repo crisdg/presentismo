@@ -1,6 +1,21 @@
 extends layout
 
 block content
-
-  h1 Presentismo
-  a(href="/empleados") Listado de empleados
+  nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    a.navbar-brand(href='/') Inicio
+    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      ul.navbar-nav
+        li.nav-item.active
+          a.nav-link(href='/listado')
+            | Calendario
+            span.sr-only (current)
+        li.nav-item
+          a.nav-link(href='/empleados') Empleados
+        li.nav-item
+          a.nav-link(href='#') 
+        li.nav-item
+          a.nav-link.disabled(href='#' tabindex='-1' aria-disabled='true') Disabled
+  .container
+    h1 Presentismo

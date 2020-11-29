@@ -47,5 +47,10 @@ table tbody tr th {
   width: 1%;
   white-space: nowrap;
   background-color: lightgray;
-  color: gray;
+  color: rgb(12, 6, 6);
+}
+
+.row.status {
+  padding-left: 20px;
+  padding-right: 20px;
 }

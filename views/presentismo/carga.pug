@@ -1,0 +1,54 @@
+extends  ../layout
+block content
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script.
+        $(document).ready(function() {
+        $("#ok").click(function() {
+        var valores = "";
+        $(".numero").parent("tr").find("td").each(function() {
+        if($(this).html() != "coger valores de la fila"){
+        valores += $(this).html() + " ";
+        }
+        });
+            valores = valores + "\\n";
+            alert(valores);
+            });
+            $(".boton").click(function() {
+            var valores = "";
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+            $(this).parents("tr").find(".numero").each(function() {
+            valores += $(this).html() + "\\n";
+            });
+            console.log(valores);
+            alert(valores);
+        });
+        });
+    table#tbl(border='1' cellspacing='0' cellpadding='5')
+    thead
+        tr
+            td Nombre 1
+            td Nombre 2
+            td Apellido 1
+            td Mantenimiento
+        tr
+            td.numero Kevin
+            td Joseph
+            td Ramos
+            td.boton coger valores de la fila
+        tr
+            td.numero Viviana
+            td Belen
+            td Rojas
+            td.boton coger valores de la fila
+        tr
+            td.numero Junior
+            td Gerardo
+            td Nos&eacute;
+            td.boton coger valores de la fila
+    br
+    form(action='')
+        label(for='') Nombre
+        input#ok.boton2(type='button' value='ok')
+    | Ampliar
+    | com

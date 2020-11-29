@@ -18,6 +18,7 @@ exports.empleadosCreatePost = function (req, res) {
     dni: req.body.dni,
     direccion: req.body.direccion,
     puesto: req.body.puesto,
+    turno: req.body.turno,
   });
   console.log(empleado);
 
@@ -28,7 +29,6 @@ exports.empleadosCreatePost = function (req, res) {
 
 exports.empleadosUpdateGet = function (req, res) {
   Empleado.findByCode(req.params.id, function (err, empleado) {
-    console.log(req.params, "desde update get");
     res.render("empleados/update", { empleado });
   });
 };
@@ -42,7 +42,7 @@ exports.empleadosUpdatePost = function (req, res) {
     empleado.dni = req.body.dni;
     empleado.direccion = req.body.direccion;
     empleado.puesto = req.body.puesto;
-    console.log(empleado, "desde update post");
+    empleado.turno = req.body.turno;
     empleado.save();
 
     res.redirect("/empleados");
@@ -53,5 +53,13 @@ exports.empleadosDeletePost = function (req, res) {
   Empleado.removeByCode(req.body.id, function (err) {
     console.log(req.body.id, "desde delete");
     res.redirect("/empleados");
+  });
+};
+
+exports.empleadosListado = function (req, res) {
+  Empleado.all(function (error, empleados) {
+    res.render("presentismo/index", {
+      empleados: empleados,
+    });
   });
 };
