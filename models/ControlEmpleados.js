@@ -30,6 +30,10 @@ controlSchema.statics.createInstance = function (
   });
 };
 
+controlSchema.statics.all = function (cb) {
+  return this.find({}, cb);
+};
+
 controlSchema.statics.add = function (control, cb) {
   this.create(control, cb);
 };

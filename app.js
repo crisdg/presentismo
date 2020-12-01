@@ -10,6 +10,7 @@ var listaRouter = require("./routes/listado");
 var cargaRouter = require("./routes/carga");
 var empleadosRouter = require("./routes/empleados");
 var empleadosApiRouter = require("./routes/API/empleados");
+var controlApiRouter = require("./routes/API/control");
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use("/listado", listaRouter);
 app.use("/carga", cargaRouter);
 app.use("/empleados", empleadosRouter);
 app.use("/API/empleados", empleadosApiRouter);
+app.use("/API/control", controlApiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

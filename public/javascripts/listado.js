@@ -7,6 +7,17 @@ var fechaFin = new Date(fin);
 let fechas = [];
 let indice = 0;
 
+function traerControl() {
+  $.ajax({
+    dataType: "json",
+    url: "API/control",
+    success: function (result) {
+      console.log(result);
+    },
+  });
+  console.log("control");
+}
+
 function llamarInforme() {
   let fechaDesde = document.getElementById("inicio");
   let fechaHasta = document.getElementById("fin");
