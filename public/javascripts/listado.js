@@ -82,7 +82,13 @@ function tomarPuesto() {
 
 radioPresente.addEventListener("change", tomarPuesto);
 
-function guardarDatos() {
+enviar = document.getElementById("enviar");
+
+enviar.addEventListener("click", guardarDatos);
+
+function guardarDatos(ev) {
+  console.log("click");
+  ev.preventDefault();
   $.ajax({
     dataType: "json",
     url: "API/empleados",
@@ -94,5 +100,24 @@ function guardarDatos() {
         result.empleados[indice].nombre;
     },
   });
+  $.ajax({
+    url: "/listado",
+    type: "post",
+    cache: false,
+    data: {
+      dia: $("input[name=dia]").val(),
+      inlineRadioOptions: $("input[name=inlineRadioOptions]:checked").val(),
+      nombre: $("input[name=nombre]").val(),
+      status: $("input[name=status]:checked").val(),
+      puesto: $("input[name=puesto]:checked").val(),
+    },
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (jqXHR, textStatus, err) {
+      alert("text status " + textStatus + ", err " + err);
+    },
+  });
+
   indice++;
 }

@@ -48,7 +48,7 @@ block content
           h5#exampleModalLongTitle.modal-title Carga Diaria
           button.close(type='button' data-dismiss='modal' aria-label='Close')
             span(aria-hidden='true') &times;
-        form(action="/listado" method="post")
+        form
           .modal-body
             input#dia.form-control(type="date" name="dia")
             
@@ -112,7 +112,7 @@ block content
 
           .modal-footer
             button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-            button.btn.btn-primary(type='submit') Save changes
+            button#enviar.btn.btn-primary(type='submit') Save changes
 
  
   table.table
