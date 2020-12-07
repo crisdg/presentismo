@@ -8,14 +8,85 @@ let fechas = [];
 let indice = 0;
 
 function traerControl() {
+  let table = document.createElement("table");
+  let encabezado = document.createElement("thead");
+  let fecha = document.createElement("tr");
+  let filaNom = document.createElement("tr");
+  let nombre = document.createElement("th");
+  let tbody = document.createElement("tbody");
+  nombre.innerHTML = "Nombre";
+  encabezado.appendChild(nombre);
+  encabezado.appendChild(fecha);
+  fecha.appendChild(nombre);
+  table.appendChild(encabezado);
+  table.appendChild(tbody);
+
+  tbody.appendChild(filaNom);
+  let fechaArray = [];
+
   $.ajax({
     dataType: "json",
     url: "API/control",
     success: function (result) {
-      console.log(result);
+      let arr = Array.from(result.control);
+      let myArr = [];
+      var nombresArr = [];
+      var statusArr = [];
+
+      arr.forEach((element) => {
+        let fechaUnica = element.fecha;
+        let nombreUnico = element.empleado;
+        let status = element.status;
+        let statusUnico = status;
+        let objStatus = new Object();
+        objStatus.nombre = nombreUnico;
+        objStatus.fecha = fechaUnica;
+        objStatus.status = statusUnico;
+
+        myArr.push(fechaUnica);
+        nombresArr.push(nombreUnico);
+        statusArr.push(statusUnico);
+      });
+      const data = new Set(myArr);
+      const nomDAta = new Set(nombresArr);
+
+      let res = [...data];
+      let resNom = [...nomDAta];
+
+      res.forEach((element) => {
+        celda = document.createElement("th");
+        txt = element;
+
+        celda.innerHTML = txt;
+
+        fecha.appendChild(celda);
+      });
+
+      resNom.forEach((element) => {
+        fila = document.createElement("tr");
+
+        celda = document.createElement("th");
+        txt = element;
+        fila.setAttribute("id", txt);
+        fila.appendChild(celda);
+        celda.innerHTML = txt;
+        console.log(element);
+
+        tbody.appendChild(fila);
+        let filtrado = arr.filter((empleado) => empleado.empleado === txt);
+        filtrado.forEach((element) => {
+          let cel = document.createElement("th");
+          let cont = element.status;
+          cel.innerHTML = cont;
+          fila.appendChild(cel);
+        });
+      });
+      let cont = document.getElementById("cont");
+
+      cont.appendChild(table);
+      console.log(table);
     },
   });
-  console.log("control");
 }
 
 function llamarInforme() {
