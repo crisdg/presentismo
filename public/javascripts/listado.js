@@ -8,6 +8,8 @@ let fechas = [];
 let indice = 0;
 
 function traerControl() {
+  let cont = document.getElementById("cont");
+  cont.innerHTML = "";
   let table = document.createElement("table");
   let encabezado = document.createElement("thead");
   let fecha = document.createElement("tr");
@@ -32,7 +34,7 @@ function traerControl() {
       let myArr = [];
       var nombresArr = [];
       var statusArr = [];
-
+      //reccorrer array de fechas
       arr.forEach((element) => {
         let fechaUnica = element.fecha;
         let nombreUnico = element.empleado;
@@ -52,16 +54,21 @@ function traerControl() {
 
       let res = [...data];
       let resNom = [...nomDAta];
-
+      //recorrer array de fechas
       res.forEach((element) => {
         celda = document.createElement("th");
         txt = element;
+        let date = new Date(txt);
 
-        celda.innerHTML = txt;
+        date.setDate(date.getDate() + 1);
+
+        currentDate = date.getDate() + "/" + date.getMonth();
+
+        celda.innerHTML = currentDate;
 
         fecha.appendChild(celda);
       });
-
+      //funcion para las celdas de nombre y status
       resNom.forEach((element) => {
         fila = document.createElement("tr");
 
@@ -70,7 +77,6 @@ function traerControl() {
         fila.setAttribute("id", txt);
         fila.appendChild(celda);
         celda.innerHTML = txt;
-        console.log(element);
 
         tbody.appendChild(fila);
         let filtrado = arr.filter((empleado) => empleado.empleado === txt);
@@ -79,9 +85,12 @@ function traerControl() {
           let cont = element.status;
           cel.innerHTML = cont;
           fila.appendChild(cel);
+          clase = cont.replace(/ /g, "");
+
+          cel.className = clase;
         });
       });
-      let cont = document.getElementById("cont");
+      table.className = "table";
 
       cont.appendChild(table);
       console.log(table);

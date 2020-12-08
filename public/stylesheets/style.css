@@ -54,3 +54,19 @@ table tbody tr th {
   padding-left: 20px;
   padding-right: 20px;
 }
+
+table tbody tr th.presente {
+  background-color: green;
+}
+
+table tbody tr th.Vacaciones {
+  background-color: blueviolet;
+}
+
+table tbody tr th.ausenteconaviso {
+  background-color: red;
+}
+
+table tbody tr th.tarde {
+  background-color: yellow;
+}
