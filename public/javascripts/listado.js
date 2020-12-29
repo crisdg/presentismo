@@ -59,6 +59,8 @@ function traerControl() {
 
       let fechasArray = [...data];
       let nombreArray = [...nomDAta];
+      nombreArray.sort();
+      console.log(fechasArray.sort());
 
       // filtro datos por fecha y genero los encabezados
       fechasArray.forEach((fecha) => {
@@ -67,7 +69,7 @@ function traerControl() {
         date.setDate(date.getDate() + 1);
 
         let shortDate = date.getDate() + "/" + (date.getMonth() + 1);
-        console.log(date);
+
         row.innerHTML = shortDate;
         titulo.appendChild(row);
 
