@@ -30,7 +30,7 @@ block content
           input#fin.form-control(type='date') 
     .form-group.justify-content-center
         .col-10
-          button(onclick='llamarInforme()').btn.btn-primary Filtrar
+          button.btn.btn-primary(onclick='traerControl()') Control
          
     .navbar-nav
       a.nav-item.nav-link.active(href='#')
@@ -114,25 +114,6 @@ block content
             button.btn.btn-secondary(type='button' data-dismiss='modal') Close
             button#enviar.btn.btn-primary(type='submit') Save changes
 
- 
-  table.table
-    thead
-      tr#fecha
-        th.name
-        
-        
-    tbody#nombres
-      each empleado in empleados
-        
-        tr
-         th.nom= empleado.apellido+" "+empleado.nombre
-         
-        
-    
-  footer
+  
 
-
-    h3 footer
-    button.btn.btn-primary(onclick='traerControl()') Control
-
-    #cont
+  #cont

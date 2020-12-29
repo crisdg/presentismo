@@ -11,31 +11,37 @@ function traerControl() {
   let cont = document.getElementById("cont");
   cont.innerHTML = "";
   let table = document.createElement("table");
+  table.className = "table";
   let encabezado = document.createElement("thead");
-  let fecha = document.createElement("tr");
-  let filaNom = document.createElement("tr");
-  let nombre = document.createElement("th");
   let tbody = document.createElement("tbody");
-  nombre.innerHTML = "Nombre";
-  encabezado.appendChild(nombre);
-  encabezado.appendChild(fecha);
-  fecha.appendChild(nombre);
+  let titulo = document.createElement("tr");
+  let tituloCont = document.createElement("th");
+  tituloCont.innerHTML = "Nombre";
+
+  titulo.appendChild(tituloCont);
+  encabezado.appendChild(titulo);
   table.appendChild(encabezado);
   table.appendChild(tbody);
+  cont.appendChild(table);
 
-  tbody.appendChild(filaNom);
-  let fechaArray = [];
+  let arrayCompleto = [];
+  let arrayFiltrado = [];
+
+  ///pruebas
+
+  /// fin de pruebas
 
   $.ajax({
     dataType: "json",
     url: "API/control",
     success: function (result) {
-      let arr = Array.from(result.control);
-      let myArr = [];
-      var nombresArr = [];
-      var statusArr = [];
-      //reccorrer array de fechas
-      arr.forEach((element) => {
+      let controlArray = Array.from(result.control);
+
+      // filtro y creo arrays de nombres y fechas unicos
+      let fechasArr = [];
+      let nombresArr = [];
+
+      controlArray.forEach((element) => {
         let fechaUnica = element.fecha;
         let nombreUnico = element.empleado;
         let status = element.status;
@@ -45,110 +51,73 @@ function traerControl() {
         objStatus.fecha = fechaUnica;
         objStatus.status = statusUnico;
 
-        myArr.push(fechaUnica);
+        fechasArr.push(fechaUnica);
         nombresArr.push(nombreUnico);
-        statusArr.push(statusUnico);
       });
-      const data = new Set(myArr);
+      const data = new Set(fechasArr);
       const nomDAta = new Set(nombresArr);
 
-      let res = [...data];
-      let resNom = [...nomDAta];
-      //recorrer array de fechas
-      res.forEach((element) => {
-        celda = document.createElement("th");
-        txt = element;
-        let date = new Date(txt);
+      let fechasArray = [...data];
+      let nombreArray = [...nomDAta];
 
+      // filtro datos por fecha y genero los encabezados
+      fechasArray.forEach((fecha) => {
+        let row = document.createElement("th");
+        let date = new Date(fecha);
         date.setDate(date.getDate() + 1);
 
-        currentDate = date.getDate() + "/" + date.getMonth();
+        let shortDate = date.getDate() + "/" + (date.getMonth() + 1);
+        console.log(date);
+        row.innerHTML = shortDate;
+        titulo.appendChild(row);
 
-        celda.innerHTML = currentDate;
+        let filtrado = controlArray.filter((dia) => dia.fecha == fecha);
 
-        fecha.appendChild(celda);
+        arrayFiltrado.push(filtrado);
       });
-      //funcion para las celdas de nombre y status
-      resNom.forEach((element) => {
-        fila = document.createElement("tr");
+      // tomo array filtrado por nombre y fecha, completo los datos faltantes con vacio
+      arrayFiltrado.forEach((element) => {
+        nombreArray.forEach((nom) => {
+          const resultado = element.find((item) => item.empleado == nom);
 
-        celda = document.createElement("th");
-        txt = element;
-        fila.setAttribute("id", txt);
-        fila.appendChild(celda);
-        celda.innerHTML = txt;
+          cont = new Object();
 
-        tbody.appendChild(fila);
-        let filtrado = arr.filter((empleado) => empleado.empleado === txt);
-        filtrado.forEach((element) => {
-          let cel = document.createElement("th");
-          let cont = element.status;
-          cel.innerHTML = cont;
-          fila.appendChild(cel);
-          clase = cont.replace(/ /g, "");
+          if (resultado) {
+            cont.fecha = resultado.fecha;
+            cont.nombre = resultado.empleado;
+            cont.status = resultado.status;
 
-          cel.className = clase;
+            arrayCompleto.push(cont);
+          } else {
+            cont.fecha = element[0].fecha;
+            cont.nombre = nom;
+            cont.status = "vacio";
+
+            arrayCompleto.push(cont);
+          }
         });
       });
-      table.className = "table";
 
-      cont.appendChild(table);
-      console.log(table);
+      //completo la tabla con los datos del array completo filtrando por nombre
+      nombreArray.forEach((nombre) => {
+        let col = document.createElement("tr");
+        let row = document.createElement("td");
+        let nomb = nombre;
+        row.innerHTML = nomb;
+        col.appendChild(row);
+        tbody.appendChild(col);
+
+        let filtrado = arrayCompleto.filter((nom) => nom.nombre == nombre);
+
+        filtrado.forEach((element) => {
+          let cel = document.createElement("td");
+          cel.innerHTML = element.status;
+          col.appendChild(cel);
+        });
+      });
     },
   });
 }
-
-function llamarInforme() {
-  let fechaDesde = document.getElementById("inicio");
-  let fechaHasta = document.getElementById("fin");
-
-  fechaInicio = fechaDesde.value;
-  fechaFin = fechaHasta.value;
-
-  localStorage.setItem("inicio", JSON.stringify(fechaInicio));
-  localStorage.setItem("fin", JSON.stringify(fechaFin));
-
-  console.log(fechaInicio, fechaFin);
-
-  window.location.reload();
-}
-window.onload = function saludar() {
-  let indice = 0;
-  let fechaDesde = document.getElementById("inicio");
-  let fechaHasta = document.getElementById("fin");
-
-  let fi = new Date(inicio);
-  let ff = new Date(fin);
-
-  let ini = fi.getFullYear() + "-" + fi.getMonth() + "-" + fi.getDate();
-  let final = ff.getFullYear() + "-" + ff.getMonth() + "-" + ff.getDate();
-
-  fechaDesde.value = ini;
-  fechaHasta.value = final;
-  fechas = [];
-
-  while (fi.getTime() <= ff.getTime()) {
-    fecha = fi.getDate() + "/" + fi.getMonth();
-
-    fechas.push(fecha);
-
-    fi.setDate(fi.getDate() + 1);
-  }
-
-  fechas.forEach((fecha) => {
-    let fechaImp = document.getElementById("fecha");
-
-    celda = document.createElement("th");
-
-    txt = document.createTextNode(fecha);
-
-    celda.appendChild(txt);
-
-    fechaImp.appendChild(celda);
-
-    fechaImp.appendChild(celda);
-  });
-};
 
 // Funcion para modal de carga
 
