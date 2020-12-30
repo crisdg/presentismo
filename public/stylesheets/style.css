@@ -60,18 +60,27 @@ table tbody tr th {
   padding-right: 20px;
 }
 
-table tbody tr th.presente {
-  background-color: green;
+table tbody tr td.presente {
+  background-color: #65fca9;
+  opacity: 0.5;
 }
 
-table tbody tr th.Vacaciones {
+table tbody tr td.Vacaciones {
   background-color: blueviolet;
 }
 
-table tbody tr th.ausenteconaviso {
+table tbody tr td.ausenteconaviso {
+  background-color: #fc6565;
+}
+
+table tbody tr td.tarde {
+  background-color: yellow;
+}
+
+table tbody tr td.ausentesinaviso {
   background-color: red;
 }
 
-table tbody tr th.tarde {
-  background-color: yellow;
+table tbody tr td.permisogremialca {
+  background-color: #fcc765;
 }

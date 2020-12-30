@@ -60,7 +60,9 @@ function traerControl() {
       let fechasArray = [...data];
       let nombreArray = [...nomDAta];
       nombreArray.sort();
-      console.log(fechasArray.sort());
+      fechasArray.sort();
+
+      console.log(nombreArray);
 
       // filtro datos por fecha y genero los encabezados
       fechasArray.forEach((fecha) => {
@@ -93,7 +95,7 @@ function traerControl() {
           } else {
             cont.fecha = element[0].fecha;
             cont.nombre = nom;
-            cont.status = "vacio";
+            cont.status = " -- ";
 
             arrayCompleto.push(cont);
           }
@@ -104,9 +106,10 @@ function traerControl() {
       nombreArray.forEach((nombre) => {
         let col = document.createElement("tr");
         let row = document.createElement("td");
+        let celdaNombre = document.createElement("th");
         let nomb = nombre;
-        row.innerHTML = nomb;
-        col.appendChild(row);
+        celdaNombre.innerHTML = nomb;
+        col.appendChild(celdaNombre);
         tbody.appendChild(col);
 
         let filtrado = arrayCompleto.filter((nom) => nom.nombre == nombre);
@@ -114,6 +117,14 @@ function traerControl() {
         filtrado.forEach((element) => {
           let cel = document.createElement("td");
           cel.innerHTML = element.status;
+
+          claseEnt = element.status;
+
+          claseSin = claseEnt.replace(/ /g, "");
+          clase = claseSin.replace(/\//g, "");
+
+          cel.classList = clase;
+
           col.appendChild(cel);
         });
       });
