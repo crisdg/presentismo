@@ -3,117 +3,117 @@ extends  ../layout
 
 block content
   
-  
-  nav.navbar.navbar-expand-lg.navbar-light.bg-light.sticky-top
-    a.navbar-brand(href='/') 
-    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false' aria-label='Toggle navigation')
-    span.navbar-toggler-icon
-    
-
-    #navbarNavAltMarkup.collapse.navbar-collapse
-
-    
-    
-    button.btn.btn-primary(type='button' data-toggle='modal' data-target='#exampleModalCenter')
-      | Cargar
+ 
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light.sticky-top
+      a.navbar-brand(href='#') 
+        button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false' aria-label='Toggle navigation')
+          span.navbar-toggler-icon
           
 
+        #navbarNavAltMarkup.collapse.navbar-collapse
 
-
-     
-    .form-group.justify-content-center
-        
-        .col-10
-          input#inicio.form-control(type='date') 
-    .form-group.justify-content-center
-        .col-10
-          input#fin.form-control(type='date') 
-    .form-group.justify-content-center
-        .col-10
-          button.btn.btn-primary(onclick='traerControl()') Control
-         
-    .navbar-nav
-      a.nav-item.nav-link.active(href='#')
-        | Home 
-        span.sr-only (current)
       
-      a.nav-item.nav-link(href='/carga') Cargar
-      a.nav-item.nav-link(href='#') Pricing
-      a.nav-item.nav-link.disabled(href='#') Disabled
-
-  #exampleModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true')
-    .modal-dialog.modal-dialog-centered(role='document')
-      .modal-content
-        .modal-header
-          h5#exampleModalLongTitle.modal-title Carga Diaria
-          button.close(type='button' data-dismiss='modal' aria-label='Close')
-            span(aria-hidden='true') &times;
-        form
-          .modal-body
-            input#dia.form-control(type="date" name="dia")
+      
+      button.btn.btn-primary(type='button' data-toggle='modal' data-target='#exampleModalCenter')
+        | Cargar
             
-            .form-check.form-check-inline
-              input#inlineRadio1.form-check-input(type='radio' name='inlineRadioOptions' value='Manana')
-              label.form-check-label(for='inlineRadio1') T. Mañana
-            .form-check.form-check-inline
-              input#inlineRadio2.form-check-input(type='radio' name='inlineRadioOptions' value='Tarde')
-              label.form-check-label(for='inlineRadio2') T. Tarde
-            .form-check.form-check-inline
-              input#inlineRadio3.form-check-input(type='radio' name='inlineRadioOptions' value='Noche')
-              label.form-check-label(for='inlineRadio3') T. Noche 
+
+
+
+      
+      .form-group.justify-content-center
+          
+          .col-10
+            input#inicio.form-control(type='date') 
+      .form-group.justify-content-center
+          .col-10
+            input#fin.form-control(type='date') 
+      .form-group.justify-content-center
+          .col-10
+            button.btn.btn-primary(onclick='traerControl()') Control
+          
+      .navbar-nav
+        a.nav-item.nav-link.active(href='/')
+          | Home 
+          span.sr-only (current)
+        
+        a.nav-item.nav-link(href='/carga') Cargar
+        a.nav-item.nav-link(href='#') Pricing
+        a.nav-item.nav-link.disabled(href='#') Disabled
+
+    #exampleModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true')
+      .modal-dialog.modal-dialog-centered(role='document')
+        .modal-content
+          .modal-header
+            h5#exampleModalLongTitle.modal-title Carga Diaria
+            button.close(type='button' data-dismiss='modal' aria-label='Close')
+              span(aria-hidden='true') &times;
+          form
+            .modal-body
+              input#dia.form-control(type="date" name="dia")
+              
+              .form-check.form-check-inline
+                input#inlineRadio1.form-check-input(type='radio' name='inlineRadioOptions' value='Manana')
+                label.form-check-label(for='inlineRadio1') T. Mañana
+              .form-check.form-check-inline
+                input#inlineRadio2.form-check-input(type='radio' name='inlineRadioOptions' value='Tarde')
+                label.form-check-label(for='inlineRadio2') T. Tarde
+              .form-check.form-check-inline
+                input#inlineRadio3.form-check-input(type='radio' name='inlineRadioOptions' value='Noche')
+                label.form-check-label(for='inlineRadio3') T. Noche 
+                br
+                br
+                br
+              input#empleado.form-control(type="text"  value=empleados[0].nombre+" "+empleados[0].apellido name='nombre')
               br
+              .row.status
+                .form-check.form-check-inline.mb-3.input-group-sm.col-sm
+                  input#situacion1.form-check-input(type='radio' name='status' value='Aus/CA')
+                  label.form-check-label(for='inlineRadio1') Aus. C/A
+                .form-check.form-check-inline.mb-3.input-group-sm.col-sm
+                  input#situacion2.form-check-input(type='radio' name='status' value='Aus/SA')
+                  label.form-check-label(for='inlineRadio2') Aus. S/A
+                .form-check.form-check-inline.mb-3.input-group-sm.col-sm
+                  input#situacion3.form-check-input(type='radio' name='status' value='SUSP.')
+                  label.form-check-label(for='inlineRadio3') Susp
+                .form-check.form-check-inline.mb-3.input-group-sm.col-sm
+                  input#situacion4.form-check-input(type='radio' name='status' value='VAC')
+                  label.form-check-label(for='inlineRadio3') Vac.
+              .row.status
+                .form-check.form-check-inline.mb-3.input-group-sm.col-sm
+                  input#situacion5.form-check-input(type='radio' name='status' value='PG/CA')
+                  label.form-check-label(for='inlineRadio3') PG C/A
+                .form-check.form-check-inline.mb-3.input-group-sm.col-sm
+                  input#situacion5.form-check-input(type='radio' name='status' value='PG/SA')
+                  label.form-check-label(for='inlineRadio3') PG S/A
+                .form-check.form-check-inline.mb-3.input-group-sm.col-sm
+                  input#situacion5.form-check-input(type='radio' name='status' value='TAR')
+                  label.form-check-label(for='inlineRadio3') Tarde
+                .form-check.form-check-inline.mb-3.input-group-sm.col-sm
+                  input#situacion5.form-check-input(type='radio' name='status' value='TAR/L')
+                  label.form-check-label(for='inlineRadio3') Tarde L.
+              .row.status  
+                .form-check.form-check-inline.mb-3.input-group-sm.col-sm
+                  input#radioPresente.form-check-input(type='radio' name='status' value='PRES')
+                  label.form-check-label(for='inlineRadio3') Presente
               br
-              br
-            input#empleado.form-control(type="text"  value=empleados[0].nombre+" "+empleados[0].apellido name='nombre')
-            br
-            .row.status
-              .form-check.form-check-inline.mb-3.input-group-sm.col-sm
-                input#situacion1.form-check-input(type='radio' name='status' value='ausente con aviso')
-                label.form-check-label(for='inlineRadio1') Aus. C/A
-              .form-check.form-check-inline.mb-3.input-group-sm.col-sm
-                input#situacion2.form-check-input(type='radio' name='status' value='ausente sin aviso')
-                label.form-check-label(for='inlineRadio2') Aus. S/A
-              .form-check.form-check-inline.mb-3.input-group-sm.col-sm
-                input#situacion3.form-check-input(type='radio' name='status' value='suspendido')
-                label.form-check-label(for='inlineRadio3') Susp
-              .form-check.form-check-inline.mb-3.input-group-sm.col-sm
-                input#situacion4.form-check-input(type='radio' name='status' value='Vacaciones')
-                label.form-check-label(for='inlineRadio3') Vac.
-            .row.status
-              .form-check.form-check-inline.mb-3.input-group-sm.col-sm
-                input#situacion5.form-check-input(type='radio' name='status' value='permiso gremial c/a')
-                label.form-check-label(for='inlineRadio3') PG C/A
-              .form-check.form-check-inline.mb-3.input-group-sm.col-sm
-                input#situacion5.form-check-input(type='radio' name='status' value='permiso gremial s/a')
-                label.form-check-label(for='inlineRadio3') PG S/A
-              .form-check.form-check-inline.mb-3.input-group-sm.col-sm
-                input#situacion5.form-check-input(type='radio' name='status' value='tarde')
-                label.form-check-label(for='inlineRadio3') Tarde
-              .form-check.form-check-inline.mb-3.input-group-sm.col-sm
-                input#situacion5.form-check-input(type='radio' name='status' value='tarde a linea')
-                label.form-check-label(for='inlineRadio3') Tarde L.
-            .row.status  
-              .form-check.form-check-inline.mb-3.input-group-sm.col-sm
-                input#radioPresente.form-check-input(type='radio' name='status' value='presente')
-                label.form-check-label(for='inlineRadio3') Presente
-            br
-            .row.status.puesto  
-              .form-check.form-check-inline.mb-3.input-group-sm.col-sm
-                input#radioPicking.form-check-input(type='radio' name='puesto' value='picking' disabled)
-                label.form-check-label(for='inlineRadio3') Picking
-              .form-check.form-check-inline.mb-3.input-group-sm.col-sm
-                input#radioPeriferia.form-check-input(type='radio' name='puesto' value='periferia' disabled)
-                label.form-check-label(for='inlineRadio3') Periferia
-              .form-check.form-check-inline.mb-3.input-group-sm.col-sm
-                input#radioExterno.form-check-input(type='radio' name='puesto' value='externo' disabled)
-                label.form-check-label(for='inlineRadio3') Externo
+              .row.status.puesto  
+                .form-check.form-check-inline.mb-3.input-group-sm.col-sm
+                  input#radioPicking.form-check-input(type='radio' name='puesto' value='picking')
+                  label.form-check-label(for='inlineRadio3') Picking
+                .form-check.form-check-inline.mb-3.input-group-sm.col-sm
+                  input#radioPeriferia.form-check-input(type='radio' name='puesto' value='periferia')
+                  label.form-check-label(for='inlineRadio3') Periferia
+                .form-check.form-check-inline.mb-3.input-group-sm.col-sm
+                  input#radioExterno.form-check-input(type='radio' name='puesto' value='externo')
+                  label.form-check-label(for='inlineRadio3') Externo
 
 
 
-          .modal-footer
-            button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-            button#enviar.btn.btn-primary(type='submit') Save changes
+            .modal-footer
+              button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+              button#enviar.btn.btn-primary(type='submit') Save changes
 
-  
+    
 
-  #cont
+    #cont

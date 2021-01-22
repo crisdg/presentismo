@@ -8,9 +8,17 @@ body {
 }
 
 table {
+  display: block;
   position: relative;
   border-collapse: collapse;
+  overflow-y: scroll;
+  max-height: 535px;
 }
+
+tbody {
+  overflow-y: auto;
+}
+
 table tr th {
   width: 1%;
   white-space: nowrap;
@@ -24,14 +32,20 @@ th {
 thead th {
   position: -webkit-sticky; /* for Safari */
   position: sticky;
-  top: 53px;
+  top: 0px;
   background: #000;
   color: #fff;
+  text-align: center;
 }
 
 thead th:first-child {
   left: 0;
-  z-index: 1;
+  z-index: 2;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
 }
 
 tbody th:first-child {
@@ -49,38 +63,44 @@ tbody tr th {
 }
 
 table tbody tr th {
-  width: 1%;
+  width: 2%;
   white-space: nowrap;
   background-color: lightgray;
   color: rgb(12, 6, 6);
 }
 
+table tbody tr td {
+  width: 100px;
+}
 .row.status {
   padding-left: 20px;
   padding-right: 20px;
 }
 
-table tbody tr td.presente {
+table tbody tr td.PRES {
   background-color: #65fca9;
-  opacity: 0.5;
 }
 
-table tbody tr td.Vacaciones {
+table tbody tr td.VAC {
   background-color: blueviolet;
 }
 
-table tbody tr td.ausenteconaviso {
+table tbody tr td.AusCA {
   background-color: #fc6565;
 }
 
-table tbody tr td.tarde {
+table tbody tr td.TAR {
   background-color: yellow;
 }
 
-table tbody tr td.ausentesinaviso {
+table tbody tr td.AusSA {
   background-color: red;
 }
 
-table tbody tr td.permisogremialca {
+table tbody tr td.PGCA {
   background-color: #fcc765;
+}
+
+.table-responsive {
+  border-top: none;
 }

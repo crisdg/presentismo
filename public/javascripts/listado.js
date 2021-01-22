@@ -11,7 +11,8 @@ function traerControl() {
   let cont = document.getElementById("cont");
   cont.innerHTML = "";
   let table = document.createElement("table");
-  table.className = "table";
+  table.className =
+    "table table-hover table-sm table-responsive table-bordered";
   let encabezado = document.createElement("thead");
   let tbody = document.createElement("tbody");
   let titulo = document.createElement("tr");
@@ -27,17 +28,14 @@ function traerControl() {
   let arrayCompleto = [];
   let arrayFiltrado = [];
 
-  ///pruebas
-
-  /// fin de pruebas
-
   $.ajax({
     dataType: "json",
     url: "API/control",
     success: function (result) {
       let controlArray = Array.from(result.control);
+      console.log(result);
 
-      // filtro y creo arrays de nombres y fechas unicos
+      // filtro y creo arrays de nombres y fechas unicos para encabezados de tabla
       let fechasArr = [];
       let nombresArr = [];
 
@@ -61,8 +59,6 @@ function traerControl() {
       let nombreArray = [...nomDAta];
       nombreArray.sort();
       fechasArray.sort();
-
-      console.log(nombreArray);
 
       // filtro datos por fecha y genero los encabezados
       fechasArray.forEach((fecha) => {
@@ -130,6 +126,7 @@ function traerControl() {
       });
     },
   });
+  console.log(table);
 }
 
 // Funcion para modal de carga
@@ -138,29 +135,12 @@ let radioPresente = document.getElementById("radioPresente");
 let radioPicking = document.getElementById("radioPicking");
 let radioPeriferia = document.getElementById("radioPeriferia");
 let radioExterno = document.getElementById("radioExterno");
-
-function tomarPuesto() {
-  if (radioPresente.checked) {
-    radioPeriferia.disabled = false;
-    radioPicking.disabled = false;
-    radioExterno.disabled = false;
-
-    console.log(radioPeriferia.disabled);
-  } else {
-    radioPeriferia.disabled = true;
-    radioPicking.disabled = true;
-    radioExterno.disabled = true;
-  }
-}
-
-radioPresente.addEventListener("change", tomarPuesto);
-
+let nombres = 2;
 enviar = document.getElementById("enviar");
 
 enviar.addEventListener("click", guardarDatos);
 
 function guardarDatos(ev) {
-  console.log("click");
   ev.preventDefault();
   $.ajax({
     dataType: "json",
@@ -171,8 +151,12 @@ function guardarDatos(ev) {
         result.empleados[indice].apellido +
         " " +
         result.empleados[indice].nombre;
+
+      nombres = result.empleados.length;
     },
   });
+
+  //guardar los datos del modal en DB
   $.ajax({
     url: "/listado",
     type: "post",
@@ -185,12 +169,15 @@ function guardarDatos(ev) {
       puesto: $("input[name=puesto]:checked").val(),
     },
     success: function (data) {
-      console.log(data);
+      console.log("GUARDADO!");
     },
     error: function (jqXHR, textStatus, err) {
       alert("text status " + textStatus + ", err " + err);
     },
   });
-
+  console.log(indice, nombres);
+  if (indice >= nombres - 1) {
+    location.reload();
+  }
   indice++;
 }
